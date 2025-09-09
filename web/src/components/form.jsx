@@ -19,12 +19,20 @@ const Form = ({toggleForm}) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validatedData = ValidateInput(data);
+    try{
+      const validatedData = ValidateInput(data);
     if(!validatedData) return;
     console.log(data);
     localStorage.setItem(data.firstName , JSON.stringify(data));
     toggleFormInternal(toggleForm)
-    window.location.reload();
+    }
+    catch(error){
+      throw new Error(error)
+    }
+    finally{
+      window.location.reload()
+    }
+   
   }
   return (
     <div className="w-full h-full absolute backdrop-blur-md top-0 flex justify-center items-center font-poppins-medium"> 
