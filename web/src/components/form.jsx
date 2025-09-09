@@ -25,12 +25,13 @@ const Form = ({toggleForm}) => {
     console.log(data);
     localStorage.setItem(data.firstName , JSON.stringify(data));
     toggleFormInternal(toggleForm)
-    alert("User Created!")
     }
     catch(error){
       throw new Error(error)
     }
-    
+    finally{
+      window.location.reload()
+    }
    
   }
   return (
