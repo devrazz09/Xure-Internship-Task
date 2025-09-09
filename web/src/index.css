@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: Poppins-medium;
+    src: url('./assets/fonts/Poppins-Medium.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: Poppins-reg;
+    src: url('./assets/fonts/Poppins-Regular.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: Poppins-black;
+    src: url('./assets/fonts/Poppins-Black.ttf') format(truetype);
+}
+
+
+@theme {
+    --font-poppins-medium: Poppins-medium, sans-serif;
+    --font-poppins-reg: Poppins-regular, sans-serif;
+    --font-poppins-black: Poppins-black, sans-serif;
+}
+
