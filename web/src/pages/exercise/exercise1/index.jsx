@@ -1,4 +1,5 @@
 import Form from "../../../components/form"
+import EditForm from "../../../components/editform"
 import UserModal from "../../../modal/usermodal"
 import { FetchDataFromLocalStorage } from "../../../hooks/fetchDataFromLocalStorage"
 import { useEffect, useState } from "react"
@@ -16,12 +17,15 @@ const Exercise1 = () => {
   const [modal, setModal] = useState(false)
   const [form, setForm] = useState(false)
   const [data, setData] = useState([])
-  
+  const [editForm, toggleEditForm] = useState(false)
   const toggleModal = (value) => {
     setModal(value)
   }
   const toggleForm = (value) => {
     setForm(value)
+  }
+  const toggleEditableForm = (value) => {
+    toggleEditForm(value)
   }
   
   useEffect(()=>{
@@ -47,7 +51,6 @@ const Exercise1 = () => {
           {data.map((item, index) => {
             const {firstName ,lastName ,age ,birthdate ,address ,middleName ,suffix} = item
             return (
-              
               <div className="w-full h-16 flex items-center justify-around hover:bg-gray-600 cursor-pointer" key={index}>
                 <div className="w-4/5 flex justify-around" 
                 onClick={()=>{
@@ -68,8 +71,13 @@ const Exercise1 = () => {
                   <p className="w-1/5 text-center text-md text-white font-poppins-medium text-wrap">{address}</p>
                 </div>
                 
-                <div className="w-1/5 flex justify-center items-center font-poppins-medium">
-                  <button className="bg-red-400 px-10 py-2 rounded-md cursor-pointer"
+                <div className="w-1/5 flex justify-center gap-6 items-center font-poppins-medium">
+                  <button className="w-2/5 bg-blue-400 px-4 py-2 rounded-md cursor-pointer"
+                   onClick={()=>{
+                    toggleEditForm(!editForm)
+                   }
+                  }>Edit</button>
+                   <button className="w-2/5 bg-red-400 px-4 py-2 rounded-md cursor-pointer"
                    onClick={
                     ()=>{
                       localStorage.removeItem(firstName);
@@ -77,12 +85,12 @@ const Exercise1 = () => {
                     }
                   }>Delete</button>
                 </div>
-                
               </div>
             )
           })}
         </div>
       </div>
+      {editForm ? <EditForm toggleForm={toggleEditableForm} userData={modalData}/> : null}     
       {form ? <Form toggleForm={toggleForm}/> : null}
       {modal ? <UserModal toggleModal={toggleModal} data={modalData}/> : null}
     </div>

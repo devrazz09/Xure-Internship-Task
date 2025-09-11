@@ -1,43 +1,50 @@
-import { useState } from "react";
 import { ValidateInput } from "../utils/validator";
-const Form = ({toggleForm}) => {
-  const toggleFormInternal = () => {
+import { useState, useEffect } from "react";
+const EditForm = ({toggleForm, userData}) =>{
+  const toggleEditableFormInternal = () =>{
     toggleForm(!toggleForm)
   }
+  useEffect(() => {
+    if(userData){
+      console.log(userData.firstName)
+    }
+  }, [userData]);
   const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    suffix: '',
-    age: '',
-    address: '',
-    birthdate: ''
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData(prev => ({...prev, [name]: value}));
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try{
-      const validatedData = ValidateInput(data);
-    if(!validatedData) return;
-    console.log(data);
-    localStorage.setItem(data.firstName , JSON.stringify(data));
-    toggleFormInternal(toggleForm)
-    window.location.reload()
+      firstName: '',
+      lastName: '',
+      middleName: '',
+      suffix: '',
+      age: '',
+      address: '',
+      birthdate: ''
+    });
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setData(prev => ({...prev, [name]: value}));
     }
-    catch(error){
-      throw new Error(error)
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      try{
+        const validatedData = ValidateInput(data);
+      if(!validatedData) return; 
+      console.log(data);
+      localStorage.setItem(data.firstName , JSON.stringify(data));
+      toggleFormInternal(toggleForm)
+      }
+      catch(error){
+        throw new Error(error)
+      }
+      finally{
+        window.location.reload()
+      }
     }
-  }
-  return (
+  return(
     <div className="w-full h-full absolute backdrop-blur-md top-0 flex justify-center items-center font-poppins-medium"> 
       <form className="w-1/4 h-3/4 text-base relative bg-linear-to-br from-[#262626] via-[#000000] to-[#262626] border border-[#FFFFF0] rounded-lg flex flex-col justify-around items-center">
-        <div className="absolute top-4 right-6 bg-red-600 px-3 rounded-md text-white text-2xl cursor-pointer" onClick={toggleFormInternal}>
+        <div className="absolute top-4 right-6 bg-red-600 px-3 rounded-md text-white text-2xl cursor-pointer" onClick={toggleEditableFormInternal}>
           x
         </div>
-        <p className="text-3xl">Add user</p>
+        <p className="text-3xl">Edit user details</p>
         <div className="w-4/5 h-2/4 flex flex-col justify-center items-center">
           <input type="text" placeholder="First Name" name="firstName" value={data.firstName} onChange={handleChange} required className="w-full border border-gray-300 rounded-md p-2 my-2"/>
           <input type="text" placeholder="Last Name" name="lastName" value={data.lastName} onChange={handleChange} required className="w-full border border-gray-300 rounded-md p-2 my-2"/>
@@ -56,4 +63,4 @@ const Form = ({toggleForm}) => {
     </div>
   )
 }
-export default Form;
+export default EditForm;
