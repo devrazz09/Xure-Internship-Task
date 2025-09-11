@@ -50,12 +50,13 @@ const Exercise1 = () => {
           </div>
           {data.map((item, index) => {
             const {firstName ,lastName ,age ,birthdate ,address ,middleName ,suffix} = item
+     
             return (
               <div className="w-full h-16 flex items-center justify-around hover:bg-gray-600 cursor-pointer" key={index}>
                 <div className="w-4/5 flex justify-around" 
                 onClick={()=>{
                 setModal(!modal)
-                setModalData({
+setModalData({
                   firstName: firstName,
                   lastName: lastName,
                   middleName: middleName,
