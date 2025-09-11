@@ -7,7 +7,7 @@ const Exercise2 = () => {
         <div className="w-1/3 h-4/5 border border-white rounded-md">
           <Link to={"weatherapp"}>Weather App</Link>
         </div>
-        <div className="w-1/3 h-4/5 border border-white rounded-md>
+        <div className="w-1/3 h-4/5 border border-white rounded-md">
           <Link to={"ecommerce"}>E-commerce</Link>
         </div>
       </div>  
