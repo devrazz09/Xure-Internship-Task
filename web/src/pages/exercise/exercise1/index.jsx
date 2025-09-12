@@ -56,7 +56,7 @@ const Exercise1 = () => {
                 <div className="w-4/5 flex justify-around" 
                 onClick={()=>{
                 setModal(!modal)
-setModalData({
+                setModalData({
                   firstName: firstName,
                   lastName: lastName,
                   middleName: middleName,
@@ -73,11 +73,6 @@ setModalData({
                 </div>
                 
                 <div className="w-1/5 flex justify-center gap-6 items-center font-poppins-medium">
-                  <button className="w-2/5 bg-blue-400 px-4 py-2 rounded-md cursor-pointer"
-                   onClick={()=>{
-                    toggleEditForm(!editForm)
-                   }
-                  }>Edit</button>
                    <button className="w-2/5 bg-red-400 px-4 py-2 rounded-md cursor-pointer"
                    onClick={
                     ()=>{
@@ -91,7 +86,6 @@ setModalData({
           })}
         </div>
       </div>
-      {editForm ? <EditForm toggleForm={toggleEditableForm} userData={modalData}/> : null}     
       {form ? <Form toggleForm={toggleForm}/> : null}
       {modal ? <UserModal toggleModal={toggleModal} data={modalData}/> : null}
     </div>

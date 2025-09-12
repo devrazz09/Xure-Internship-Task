@@ -18,8 +18,6 @@ const router = createBrowserRouter([
           { index: true, Component: ExerciseHomePage},
           { path: "exercise1", Component: Exercise1},
           { path: "exercise2", Component: Exercise2},
-
-         
         ]
       }
     ],

@@ -1,22 +1,19 @@
 import { ValidateInput } from "../utils/validator";
 import { useState, useEffect } from "react";
 const EditForm = ({toggleForm, userData}) =>{
+
+  const [ name, setName ] = useState(userData.firstName)
   const toggleEditableFormInternal = () =>{
     toggleForm(!toggleForm)
   }
-  useEffect(() => {
-    if(userData){
-      console.log(userData.firstName)
-    }
-  }, [userData]);
   const [data, setData] = useState({
-      firstName: '',
-      lastName: '',
-      middleName: '',
-      suffix: '',
-      age: '',
-      address: '',
-      birthdate: ''
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      middleName: userData.middleName,
+      suffix: userData.suffix,
+      age: userData.age,
+      address: userData.address,
+      birthdate: userData.birthdate
     });
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -27,15 +24,18 @@ const EditForm = ({toggleForm, userData}) =>{
       try{
         const validatedData = ValidateInput(data);
       if(!validatedData) return; 
-      console.log(data);
-      localStorage.setItem(data.firstName , JSON.stringify(data));
-      toggleFormInternal(toggleForm)
+      if(name == data.firstName){
+         localStorage.setItem(data.firstName , JSON.stringify(data));
+       window.location.reload()
+      }
+      else{
+        localStorage.removeItem(name)
+        localStorage.setItem(data.firstName , JSON.stringify(data));
+        window.location.reload()
+      }
       }
       catch(error){
-        throw new Error(error)
-      }
-      finally{
-        window.location.reload()
+        throw new Error(error.message)
       }
     }
   return(
